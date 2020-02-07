@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- header -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<!--<link rel="icon" href="favicon.ico"/>-->
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="/~chuang/lib/theme/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+<!-- font awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- custom bootstrap theme -->
+<link href="/~chuang/lib/theme/theme.css" rel="stylesheet">
+<link href="/~chuang/lib/theme/callout.css" rel="stylesheet">
+<link href="/~chuang/lib/custom.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style></style>
+<title>Chun-Ying Huang</title>
+<style>
+code {
+	margin: 8px 0;
+	white-space: pre;
+	display: block;
+}
+</style>
+</head>
+<!-- body -->
+<body role="document">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+	<!-- for mobile toggle button -->
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+	<!--<a class="navbar-brand">Chun-Ying Huang</a>-->
+	<a class="navbar-brand"><img src="/~chuang/images/n_all.png" style="border: none"/></a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+	<ul class="nav navbar-nav">
+	<li><a href="/~chuang/">Home</a></li>
+	<li><a href="/~chuang/students.php">Students</a></li>
+	<!--<li><a href="projects.php">Projects</a></li>-->
+	<li><a href="/~chuang/pubs.php">Publications</a></li>
+	<li class="dropdown active">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <span class="caret"></span></a>
+		<ul class="dropdown-menu">
+		<!--<li role="separator" class="divider"></li>
+		<li class="dropdown-header">Courses</li>-->
+		<li><a href="/~chuang/courses/unixprog/">UNIX Programming</a></li>
+		<li><a href="/~chuang/courses/softdev/">Software Development Practice</a></li>
+		<li><a href="/~chuang/courses/swsec/">Software Security (Secure Programming)</a></li>
+		<!--<li><a href="#">Another action</a></li>
+		<li><a href="#">Something else here</a></li>
+		<li role="separator" class="divider"></li>
+		<li class="dropdown-header">External resources</li>
+		<li><a href="#">Separated link</a></li>
+		<li><a href="#">One more separated link</a></li>-->
+		</ul>
+	</li>
+	</ul>
+</div><!--/.nav-collapse -->
+</div>
+</nav>
+<!-- main body -->
+<div class="container theme-showcase" role="main">
+
+<h3>Homework #1</h3>
+<h4><small>Advanced Programming in the UNIX Environment</small></h4>
+
+<h4>Due: Oct 18, 2019</h4>
+
+<h3>Implement a 'netstat -nap'-like program</h3>
+
+<p>In this homework, you have to implement a 'netstat -nap' tool by yourself. You have to list all the existing TCP and UDP connections. For each identified connection (socket descriptor), find the corresponding process name and its command lines that creates the connection (socket descriptor). <b>You have to implement all the features by yourself and cannot make calls to the system built-in netstat program nor parse output from 'netstat -nap'</b>. Your codes must be implemented in C and/or C++.</p>
+
+<p>To provide more flexibilities, your program have to accept several predefined options, including
+<ul>
+<li>-t or --tcp: list only TCP connections.</li>
+<li>-u or --udp: list only UDP connections.</li>
+<li>An optional string to list only command lines that containing the string.</li>
+</ul>
+If both -t and -u are provided, you should ignore the two options.
+You have to handle the additional options using getopt_long function. In short, the synopsis of homework #1 would be:
+<code>$ ./hw1 [-t|--tcp] [-u|--udp] [filter-string]</code>
+When no argument is passed, your program should output all identified connections. You may test your program with a root account so that your program would be able to access /proc files owned by other users.</p>
+
+<h3>Grading</h3>
+
+<p>The tentative grading policy for this homework is listed below:
+<ul>
+<li>[10%] List TCP and UDP connetions (IPv4).</li>
+<li>[10%] List TCP and UDP connetions (IPv6).</li>
+<li>[30%] Show corresponding program names and arguments for each identified connection.</li>
+<li>[10%] Implement -u and --udp option using getopt_long(3).</li>
+<li>[10%] Implement -t and --tcp option using getopt_long(3).</li>
+<li>[10%] Translate network address into user-friendly formats, e.g., from <b>0100007F</b> to <b>127.0.0.1</b>, and from <b>FE01A8C0</b> to <b>192.168.1.254</b>.</li>
+<li>[10%] Implement basic filter string feature.</li>
+<li>[10%] Use Makefile to manage the building process of your program.</li>
+<li>[10%] If your filter string supports regular expression, see regex(3).</li>
+</ul>
+</p>
+
+<h3>Homework Submission</h3>
+
+<p>Plesae submit your homework via the E3/iLMS system. You can simply submit your modified main program (main.c), and we will try to compile and link your codes against the job code. If you have multiple files, pack them in a .zip archive. Scores will be graded based on the completeness of your implementation.</p>
+
+<h3>Hints</h3>
+
+We have some hints for you to implement this homework.
+
+<ul>
+<li>Look at the two files /proc/net/tcp and /proc/net/udp, and google for relevant information. Well, the file content is not difficult to understand.</li>
+<li>Read files in /proc/[pid]/fd</li>
+<li>Traverse all /proc/[pid]/fd directories and identify socket descriptors. The socket descriptors are actually symbolic links point to 'socket:[inode]' or '[0000]:inode', where inode is the corresponding inode number used in /proc/net/tcp and /proc/net/udp.</li>
+<li>You may need to work with opendir(3), readdir(3), stat(2), and readlink(2)</li>
+<li>For address conversion, you may consider working with <a target="_blank" href="http://man7.org/linux/man-pages/man3/inet_ntop.3.html">inet_ntop(3)</a> function. You may also want to include &lt;netinet/in.h&gt; for <a target="_blank" href="http://bazaar.launchpad.net/~vcs-imports/glibc/master/view/head:/inet/netinet/in.h#L31">in_addr</a> and <a target="_blank" href="http://bazaar.launchpad.net/~vcs-imports/glibc/master/view/head:/inet/netinet/in.h#L211">in6_addr</a> data structure. For how addresses are shown to the users, you may have a look at <a target="_blank" href="http://lxr.free-electrons.com/source/net/ipv4/tcp_ipv4.c#L2255">tcp</a> and <a target="_blank" href="http://lxr.free-electrons.com/source/net/ipv6/tcp_ipv6.c#L1779">tcp6</a> liunx kernel codes. You can then fill in_addr and in6_addr data structure.</li>
+<li>For the ease of debugging, some sample addresses are shown for you (works on little-endian machines, e.g., i386 and x86_64).<br/>
+- IPv4 address: 017AA8C0 &lt;===&gt; 192.168.122.1<br/>
+- IPv6 address: BACD0120000000000000000052965732 &lt;===&gt; 2001:cdba::3257:9652<br/>
+- IPv6 address: 0000000000000000FFFF0000BF00A8C0 &lt;===&gt; ::ffff:192.168.0.191</li>
+</ul>
+
+<h3>Samples</h3>
+
+<h4>Run the command without any argument</h4>
+
+<code>$ ./hw1
+List of TCP connections:
+Proto Local Address           Foreign Address         PID/Program name and arguments
+tcp   0.0.0.0:993             0.0.0.0:*               2472/dovecot    
+tcp   0.0.0.0:60546           0.0.0.0:*               764/rpc.statd   
+tcp   0.0.0.0:995             0.0.0.0:*               2472/dovecot    
+tcp   127.0.0.1:3306          0.0.0.0:*               2684/mysqld     
+tcp   0.0.0.0:110             0.0.0.0:*               2472/dovecot    
+tcp   0.0.0.0:143             0.0.0.0:*               2472/dovecot    
+tcp   0.0.0.0:111             0.0.0.0:*               742/rpcbind     
+tcp   0.0.0.0:465             0.0.0.0:*               2827/master     
+tcp   192.168.1.254:53        0.0.0.0:*               30495/named     
+tcp   127.0.0.1:53            0.0.0.0:*               30495/named     
+tcp   10.0.3.1:53             0.0.0.0:*               2580/dnsmasq    
+tcp   127.0.0.1:631           0.0.0.0:*               27868/cupsd     
+tcp   127.0.0.1:953           0.0.0.0:*               30495/named     
+tcp   0.0.0.0:25              0.0.0.0:*               2827/master     
+tcp   0.0.0.0:1723            0.0.0.0:*               2845/pptpd      
+tcp   140.113.1.1:50275       140.112.172.4:23        16993/telnet ptt.cc
+tcp6  :::993                  :::*                    2472/dovecot    
+tcp6  :::995                  :::*                    2472/dovecot    
+tcp6  :::2122                 :::*                    2475/sshd       
+tcp6  :::110                  :::*                    2472/dovecot    
+tcp6  :::143                  :::*                    2472/dovecot    
+tcp6  :::111                  :::*                    742/rpcbind     
+tcp6  :::80                   :::*                    4358/apache2    
+tcp6  :::465                  :::*                    2827/master     
+tcp6  :::53                   :::*                    30495/named     
+tcp6  :::33173                :::*                    764/rpc.statd   
+tcp6  ::1:631                 :::*                    27868/cupsd     
+tcp6  ::1:953                 :::*                    30495/named     
+tcp6  :::25                   :::*                    2827/master     
+tcp6  :::443                  :::*                    4358/apache2    
+tcp6  ::1:53859               ::1:631                 2608/cups-browsed
+
+List of UDP connections:
+Proto Local Address           Foreign Address         PID/Program name and arguments
+udp   0.0.0.0:5353            0.0.0.0:*               1071/avahi-daemon: 
+udp   0.0.0.0:56307           0.0.0.0:*               764/rpc.statd   
+udp   0.0.0.0:41678           0.0.0.0:*               1071/avahi-daemon: 
+udp   0.0.0.0:12491           0.0.0.0:*               2559/dhcpd      
+udp   10.0.3.1:53             0.0.0.0:*               30495/named     
+udp   192.168.1.254:53        0.0.0.0:*               30495/named     
+udp   127.0.0.1:53            0.0.0.0:*               30495/named     
+udp   10.0.3.1:53             0.0.0.0:*               2580/dnsmasq    
+udp   0.0.0.0:67              0.0.0.0:*               2559/dhcpd      
+udp   0.0.0.0:67              0.0.0.0:*               2580/dnsmasq    
+udp   0.0.0.0:111             0.0.0.0:*               742/rpcbind     
+udp   0.0.0.0:631             0.0.0.0:*               2608/cups-browsed
+udp   0.0.0.0:913             0.0.0.0:*               742/rpcbind     
+udp   127.0.0.1:940           0.0.0.0:*               764/rpc.statd   
+udp6  :::5353                 :::*                    1071/avahi-daemon: 
+udp6  :::59492                :::*                    764/rpc.statd   
+udp6  :::53                   :::*                    30495/named     
+udp6  :::111                  :::*                    742/rpcbind     
+udp6  :::913                  :::*                    742/rpcbind     
+udp6  :::34193                :::*                    1071/avahi-daemon: 
+udp6  :::18161                :::*                    2559/dhcpd      
+</code>
+
+<h4>Run the command with --tcp</h4>
+
+<code>$ ./hw1 --tcp
+(only show TCP connections)</code>
+
+<h4>Run the command with --tcp and a filter string</h4>
+
+<code>$ ./hw1 --tcp telnet
+List of TCP connections:
+Proto Local Address           Foreign Address         PID/Program name and arguments
+tcp   140.113.1.1:50275       140.112.172.4:23        16993/telnet ptt.cc</code>
+
+
+</div><!-- container -->
+<footer class="footer">
+	<div class="container">
+	<hr/>
+	<p><small>&copy; 2008&mdash;2019 Chun-Ying Huang, Security and Systems Laboratory, Department of Computer Science, National Chiao Tung University.</small></p>
+	</div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75749309-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!--<script src="lib/theme/docs.min.js"></script>-->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/~chuang/lib/theme/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+*.o
+*.out
+.DS_Store
+*.order
+*.symvers
+*.ko
+*.cmd
+*.mk
+*.tmp*
+
